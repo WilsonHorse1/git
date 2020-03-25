@@ -1070,6 +1070,7 @@ finalize_junit_xml () {
 		junit_time=$(test-tool date getnanos $junit_suite_start)
 		sed -e "s/\(<testsuite.*\) time=\"[^\"]*\"/\1/" \
 			-e "s/<testsuite [^>]*/& time=\"$junit_time\"/" \
+			-e '/^ *<\/testsuite/d' \
 			<"$junit_xml_path" >"$junit_xml_path.new"
 		mv "$junit_xml_path.new" "$junit_xml_path"
 
